@@ -1,5 +1,8 @@
-import {useShopQuery, flattenConnection, Link} from '@shopify/hydrogen';
+import { useShopQuery, flattenConnection, Link } from '@shopify/hydrogen';
 import gql from 'graphql-tag';
+import TestSass from './TestSass';
+import TestSassClient from './TestSassClient.client';
+import TestSassServer from './TestSassServer.server';
 
 function ExternalIcon() {
   return (
@@ -17,7 +20,7 @@ function ExternalIcon() {
   );
 }
 
-function DocsButton({url, label}) {
+function DocsButton({ url, label }) {
   return (
     <a
       href={url}
@@ -31,7 +34,7 @@ function DocsButton({url, label}) {
   );
 }
 
-function StorefrontInfo({shopName, totalProducts, totalCollections}) {
+function StorefrontInfo({ shopName, totalProducts, totalCollections }) {
   const pluralize = (count, noun, suffix = 's') =>
     `${count} ${noun}${count === 1 ? '' : suffix}`;
   return (
@@ -71,7 +74,7 @@ function StorefrontInfo({shopName, totalProducts, totalCollections}) {
   );
 }
 
-function TemplateLinks({firstProductPath, firstCollectionPath}) {
+function TemplateLinks({ firstProductPath, firstCollectionPath }) {
   return (
     <div className="bg-white p-12 md:p-12 shadow-xl rounded-xl text-gray-900">
       <p className="text-md font-medium uppercase mb-4">
@@ -108,7 +111,7 @@ function TemplateLinks({firstProductPath, firstCollectionPath}) {
 }
 
 export default function Welcome() {
-  const {data} = useShopQuery({query: QUERY});
+  const { data } = useShopQuery({ query: QUERY });
   const shopName = data ? data.shop.name : '';
   const products = data && flattenConnection(data.products);
   const collections = data && flattenConnection(data.collections);
@@ -124,6 +127,9 @@ export default function Welcome() {
         <h1 className="font-extrabold mb-4 text-5xl md:text-7xl">
           Hello, Hydrogen
         </h1>
+        <TestSass />
+        <TestSassClient />
+        <TestSassServer />
         <p className="text-lg mb-8">
           Welcome to your custom storefront. Let&rsquo;s get building.
         </p>
